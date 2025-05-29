@@ -2,7 +2,7 @@
 {
     public static class CollegeRepository
     {
-        public static IEnumerable<Student> Students { get; set; } = new List<Student>()
+        public static List<Student> Students { get; set; } = new List<Student>()
             {
                 new Student()
                 {
