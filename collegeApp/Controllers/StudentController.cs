@@ -7,26 +7,19 @@ namespace collegeApp.Controllers
     [ApiController]
     public class StudentController : Controller
     {
+        
         [HttpGet]
-       public IEnumerable<Student> GetStudent()
+       public IEnumerable<Student> GetStudents()
         {
-            return new List<Student>()
-            {
-                new Student()
-                {
-                    Id = 1,
-                    StudentName = "TestName1",
-                    Email="TestName1@gmail.com",
-                    Address="Test Address1",
-                },
-                new Student()
-                {
-                    Id = 2,
-                    StudentName = "TestName2",
-                    Email="TestName2@gmail.com",
-                    Address="Test Address2",
-                }
-            };
+            return CollegeRepository.Students;
         }
+
+        [HttpGet("{id:int}")]
+        public Student GetStudentById(int id)
+        {
+            return CollegeRepository.Students.Where(student=>id==student.Id).FirstOrDefault();
+        }
+
+
     }
 }
