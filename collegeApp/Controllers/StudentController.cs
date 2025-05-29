@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using collegeApp.Model;
+using Microsoft.AspNetCore.Mvc;
 
 namespace collegeApp.Controllers
 {
@@ -7,9 +8,25 @@ namespace collegeApp.Controllers
     public class StudentController : Controller
     {
         [HttpGet]
-       public string GetStudent()
+       public IEnumerable<Student> GetStudent()
         {
-            return "student name 1";
+            return new List<Student>()
+            {
+                new Student()
+                {
+                    Id = 1,
+                    StudentName = "TestName1",
+                    Email="TestName1@gmail.com",
+                    Address="Test Address1",
+                },
+                new Student()
+                {
+                    Id = 2,
+                    StudentName = "TestName2",
+                    Email="TestName2@gmail.com",
+                    Address="Test Address2",
+                }
+            };
         }
     }
 }
