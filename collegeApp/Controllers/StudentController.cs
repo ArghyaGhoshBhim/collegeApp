@@ -1,4 +1,5 @@
 ﻿using collegeApp.Model;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace collegeApp.Controllers
@@ -86,6 +87,28 @@ namespace collegeApp.Controllers
             }
             CollegeRepository.Students.Remove(student);
             return Ok(true);
+        }
+
+        [HttpPost]
+        [Route("Create")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public ActionResult<StudentDTO> CreateStudent([FromBody] StudentDTO model)
+        {
+            if (model == null)
+            {
+                return BadRequest();
+            }
+            model.Id = CollegeRepository.Students.LastOrDefault().Id+1;
+            var student = new Student()
+            {
+                Id = model.Id,
+                StudentName = model.StudentName,
+                Email = model.Email,
+                Address = model.Address,
+            };
+
+            CollegeRepository.Students.Add(student);
+            return Ok(model);
         }
 
 
