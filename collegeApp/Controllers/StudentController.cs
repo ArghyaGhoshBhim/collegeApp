@@ -108,7 +108,7 @@ namespace collegeApp.Controllers
             };
 
             CollegeRepository.Students.Add(student);
-            return Ok(model);
+            return CreatedAtRoute("GetStudentById", new { Id = student.Id }, model);
         }
 
 
