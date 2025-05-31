@@ -10,30 +10,42 @@ namespace collegeApp.Controllers
         
         [HttpGet]
         [Route("All", Name = "GetStudents")]
-       public IEnumerable<Student> GetStudents()
+       public ActionResult<IEnumerable<Student>> GetStudents()
         {
-            return CollegeRepository.Students;
+            return Ok(CollegeRepository.Students);
         }
 
         [HttpGet]
         [Route("{id:int}", Name = "GetStudentById")]
-        public Student GetStudentById(int id)
+        public ActionResult<Student> GetStudentById(int id)
         {
-            return CollegeRepository.Students.Where(student=>id==student.Id).FirstOrDefault();
+            if (id < 0)
+            {
+                return BadRequest();
+            }
+            return Ok(CollegeRepository.Students.Where(student=>id==student.Id).FirstOrDefault());
         }
 
         [HttpGet("{name:alpha}", Name = "GeStudentByName")]
-        public Student GeStudentByName(string name)
+        public ActionResult<Student> GeStudentByName(string name)
         {
-            return CollegeRepository.Students.Where(student => name == student.StudentName).FirstOrDefault();
+            return Ok(CollegeRepository.Students.Where(student => name == student.StudentName).FirstOrDefault());
         }
 
         [HttpDelete("{id}", Name = "DeleteStudentById")]
-        public bool DeleteStudentById(int id)
+        public ActionResult<bool> DeleteStudentById(int id)
         {
+            if (id<0)
+            {
+                return BadRequest();
+            }
             var student=CollegeRepository.Students.FirstOrDefault(s => s.Id == id); ;
+            if (student == null)
+            {
+                return NotFound();
+            }
             CollegeRepository.Students.Remove(student);
-            return true;
+            return Ok(true);
         }
 
 
