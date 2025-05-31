@@ -7,14 +7,14 @@
                 new Student()
                 {
                     Id = 1,
-                    StudentName = "TestName1",
+                    StudentName = "arghya",
                     Email="TestName1@gmail.com",
                     Address="Test Address1",
                 },
                 new Student()
                 {
                     Id = 2,
-                    StudentName = "TestName2",
+                    StudentName = "raja",
                     Email="TestName2@gmail.com",
                     Address="Test Address2",
                 }
