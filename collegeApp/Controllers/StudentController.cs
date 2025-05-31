@@ -92,6 +92,9 @@ namespace collegeApp.Controllers
         [HttpPost]
         [Route("Create")]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+
         public ActionResult<StudentDTO> CreateStudent([FromBody] StudentDTO model)
         {
             if (model == null)

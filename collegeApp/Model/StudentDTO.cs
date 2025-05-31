@@ -7,11 +7,19 @@ namespace collegeApp.Model
     {
         [ValidateNever]
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Student name is required")]
         [StringLength(50)]
         public string StudentName { get; set; }
-        [EmailAddress]
+        [Required]
+        [EmailAddress(ErrorMessage ="Please enter a valid email address")]
         public string Email { get; set; }
+        [Range(10, 30)]
+        public int Age { get; set; }
         public string Address { get; set; }
+
+        public string Password {  get; set; }
+
+        [Compare(nameof(Password))]
+        public string ConfirmPassword {  get; set; }
     }
 }
