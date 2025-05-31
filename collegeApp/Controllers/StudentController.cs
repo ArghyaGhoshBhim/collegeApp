@@ -10,6 +10,7 @@ namespace collegeApp.Controllers
         
         [HttpGet]
         [Route("All", Name = "GetStudents")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
        public ActionResult<IEnumerable<Student>> GetStudents()
         {
             return Ok(CollegeRepository.Students);
@@ -17,6 +18,8 @@ namespace collegeApp.Controllers
 
         [HttpGet]
         [Route("{id:int}", Name = "GetStudentById")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<Student> GetStudentById(int id)
         {
             if (id < 0)
@@ -27,12 +30,15 @@ namespace collegeApp.Controllers
         }
 
         [HttpGet("{name:alpha}", Name = "GeStudentByName")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<Student> GeStudentByName(string name)
         {
             return Ok(CollegeRepository.Students.Where(student => name == student.StudentName).FirstOrDefault());
         }
 
         [HttpDelete("{id}", Name = "DeleteStudentById")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<bool> DeleteStudentById(int id)
         {
             if (id<0)
