@@ -11,29 +11,63 @@ namespace collegeApp.Controllers
         [HttpGet]
         [Route("All", Name = "GetStudents")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-       public ActionResult<IEnumerable<Student>> GetStudents()
+       public ActionResult<IEnumerable<StudentDTO>> GetStudents()
         {
-            return Ok(CollegeRepository.Students);
+            var students = CollegeRepository.Students.Select(s => new StudentDTO()
+            {
+                Id = s.Id,
+                StudentName = s.StudentName,
+                Email = s.Email,
+                Address = s.Address,
+            });
+            return Ok(students);
         }
 
         [HttpGet]
         [Route("{id:int}", Name = "GetStudentById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Student> GetStudentById(int id)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<StudentDTO> GetStudentById(int id)
         {
             if (id < 0)
             {
                 return BadRequest();
             }
-            return Ok(CollegeRepository.Students.Where(student=>id==student.Id).FirstOrDefault());
+            var student = CollegeRepository.Students.Where(student => id == student.Id).FirstOrDefault();
+            if(student == null)
+            {
+                return NotFound();
+            }
+            var studentDTO = new StudentDTO()
+            {
+                Id = student.Id,
+                StudentName = student.StudentName,
+                Email = student.Email,
+                Address = student.Address,
+            };
+            return Ok(studentDTO);
         }
 
         [HttpGet("{name:alpha}", Name = "GeStudentByName")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<Student> GeStudentByName(string name)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<StudentDTO> GeStudentByName(string name)
         {
-            return Ok(CollegeRepository.Students.Where(student => name == student.StudentName).FirstOrDefault());
+            var student = CollegeRepository.Students.Where(student => name == student.StudentName).FirstOrDefault();
+            if (student == null)
+            {
+                return NotFound();
+            }
+            var studentDTO = new StudentDTO()
+            {
+                Id = student.Id,
+                StudentName = student.StudentName,
+                Email = student.Email,
+                Address = student.Address,
+            };
+
+            return Ok(studentDTO);
         }
 
         [HttpDelete("{id}", Name = "DeleteStudentById")]
