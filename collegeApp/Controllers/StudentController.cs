@@ -115,5 +115,31 @@ namespace collegeApp.Controllers
         }
 
 
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType (StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public ActionResult UpdateStudent([FromBody] StudentDTO model)
+        {
+            if(model == null || model.Id <= 0)
+            {
+                return BadRequest();
+            }
+
+            var existingStudent= CollegeRepository.Students.Where(s=>s.Id == model.Id).FirstOrDefault();
+            if(existingStudent == null)
+            {
+                return NotFound();
+            }
+
+            existingStudent.StudentName = model.StudentName;
+            existingStudent.Email = model.Email;
+            existingStudent.Address = model.Address;
+
+            return NoContent();
+
+        }
+
+
     }
 }
