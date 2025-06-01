@@ -1,6 +1,8 @@
 ﻿using collegeApp.Model;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace collegeApp.Controllers
 {
@@ -8,11 +10,11 @@ namespace collegeApp.Controllers
     [ApiController]
     public class StudentController : Controller
     {
-        
+
         [HttpGet]
         [Route("All", Name = "GetStudents")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-       public ActionResult<IEnumerable<StudentDTO>> GetStudents()
+        public ActionResult<IEnumerable<StudentDTO>> GetStudents()
         {
             var students = CollegeRepository.Students.Select(s => new StudentDTO()
             {
@@ -36,7 +38,7 @@ namespace collegeApp.Controllers
                 return BadRequest();
             }
             var student = CollegeRepository.Students.Where(student => id == student.Id).FirstOrDefault();
-            if(student == null)
+            if (student == null)
             {
                 return NotFound();
             }
@@ -76,11 +78,11 @@ namespace collegeApp.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<bool> DeleteStudentById(int id)
         {
-            if (id<0)
+            if (id < 0)
             {
                 return BadRequest();
             }
-            var student=CollegeRepository.Students.FirstOrDefault(s => s.Id == id); ;
+            var student = CollegeRepository.Students.FirstOrDefault(s => s.Id == id); ;
             if (student == null)
             {
                 return NotFound();
@@ -101,7 +103,7 @@ namespace collegeApp.Controllers
             {
                 return BadRequest();
             }
-            model.Id = CollegeRepository.Students.LastOrDefault().Id+1;
+            model.Id = CollegeRepository.Students.LastOrDefault().Id + 1;
             var student = new Student()
             {
                 Id = model.Id,
@@ -117,17 +119,17 @@ namespace collegeApp.Controllers
 
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType (StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult UpdateStudent([FromBody] StudentDTO model)
         {
-            if(model == null || model.Id <= 0)
+            if (model == null || model.Id <= 0)
             {
                 return BadRequest();
             }
 
-            var existingStudent= CollegeRepository.Students.Where(s=>s.Id == model.Id).FirstOrDefault();
-            if(existingStudent == null)
+            var existingStudent = CollegeRepository.Students.Where(s => s.Id == model.Id).FirstOrDefault();
+            if (existingStudent == null)
             {
                 return NotFound();
             }
@@ -135,6 +137,47 @@ namespace collegeApp.Controllers
             existingStudent.StudentName = model.StudentName;
             existingStudent.Email = model.Email;
             existingStudent.Address = model.Address;
+
+            return NoContent();
+
+        }
+
+        [HttpPatch]
+        [Route("{id}/updatePartially")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public ActionResult UpdateStudentPartially(int id,[FromBody] JsonPatchDocument<StudentDTO> patchDocument)
+        {
+            if (patchDocument == null || id <= 0)
+            {
+                return BadRequest();
+            }
+
+            var existingStudent = CollegeRepository.Students.Where(s => s.Id == id).FirstOrDefault();
+            if (existingStudent == null)
+            {
+                return NotFound();
+            }
+
+            var studentDto=new StudentDTO()
+            {
+                Id = id,
+                StudentName=existingStudent.StudentName,
+                Email=existingStudent.Email,
+                Address=existingStudent.Address,
+            };
+
+            patchDocument.ApplyTo(studentDto, ModelState);
+
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            existingStudent.StudentName = studentDto.StudentName;
+            existingStudent.Email = studentDto.Email;
+            existingStudent.Address = studentDto.Address;
 
             return NoContent();
 
