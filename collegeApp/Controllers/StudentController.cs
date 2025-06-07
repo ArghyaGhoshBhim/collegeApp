@@ -22,7 +22,7 @@ namespace collegeApp.Controllers
                 StudentName = s.StudentName,
                 Email = s.Email,
                 Address = s.Address,
-            });
+            }).ToList();
             return Ok(students);
         }
 
