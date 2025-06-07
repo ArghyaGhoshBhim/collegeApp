@@ -8,11 +8,12 @@ namespace collegeApp.Controllers
     public class DemoController : Controller
     {
         private readonly IMyLogger _logger;
-        public DemoController()
+        public DemoController(IMyLogger myLogger)
         {
             //_logger = new LogToFile();
             //_logger = new LogToServerMemory();
-            _logger = new LogToDB();
+            //_logger = new LogToDB();
+            _logger = myLogger;
         }
 
         [HttpGet]
