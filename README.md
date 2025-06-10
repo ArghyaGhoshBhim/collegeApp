@@ -23,6 +23,25 @@ Now it Will accept in xml format as well
 ![image](https://github.com/user-attachments/assets/8091dfd6-bb55-4be7-8e69-cb28b157d0c9)
 
 
+# Logger
+### Console and debug Mode logger we can use without any configuration
+ ![image](https://github.com/user-attachments/assets/34683afe-1106-4632-aaa5-4cf938115e1e)
+ ![image](https://github.com/user-attachments/assets/a9b27933-28a1-442d-836f-67efdffef6bc)
+
+#### We can remove all the default logger(Console, Debug, EventSource, EventLog (Windows only)) by using this:
+
+![image](https://github.com/user-attachments/assets/8d6917af-853f-467a-805c-a49dedc7754c)
+
+#### Now we can enable any of the mode like this
+
+![image](https://github.com/user-attachments/assets/d846d272-9609-469b-81d5-13fe90b0cf1f)
+
+![image](https://github.com/user-attachments/assets/48d9567a-3a53-4688-9fa4-407994ad55fa)
+
+
+ 
+ 
+
 
 
 
