@@ -38,6 +38,21 @@ Now it Will accept in xml format as well
 
 ![image](https://github.com/user-attachments/assets/48d9567a-3a53-4688-9fa4-407994ad55fa)
 
+### Log Levels in Web api
+ 
+![image](https://github.com/user-attachments/assets/9340a845-e71d-486e-9d2a-875cc08cdd0e)
+
+![image](https://github.com/user-attachments/assets/ef204864-f263-4dd1-ba64-3b7627e0a207)
+
+#### It will log 2 level’s only (Error and Critical) as for console app we have set Default as Error
+![image](https://github.com/user-attachments/assets/a2653fc0-f85c-416f-a960-364542178604)
+![image](https://github.com/user-attachments/assets/cf7fdd1d-f7f2-4b89-b80f-645a1ee1025d)
+
+#### For Debug provider it will log all the levels
+ 
+![image](https://github.com/user-attachments/assets/69753996-28e9-437a-aafa-5e3caabc9d1e)
+
+
 
  
  
