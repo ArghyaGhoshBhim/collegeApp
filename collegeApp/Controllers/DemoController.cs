@@ -7,8 +7,8 @@ namespace collegeApp.Controllers
     [ApiController]
     public class DemoController : Controller
     {
-        private readonly IMyLogger _logger;
-        public DemoController(IMyLogger myLogger)
+        private readonly ILogger<DemoController> _logger;
+        public DemoController(ILogger<DemoController> myLogger)
         {
             //_logger = new LogToFile();
             //_logger = new LogToServerMemory();
@@ -19,7 +19,12 @@ namespace collegeApp.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            _logger.Log("Index Method started");
+            _logger.LogTrace("Log message from trace");
+            _logger.LogDebug("Log message from trace"); 
+            _logger.LogInformation("Log message from trace");
+            _logger.LogWarning("Log message from trace");
+            _logger.LogError("Log message from trace");
+            _logger.LogCritical("Log message from trace");
             return Ok();
         }
     }

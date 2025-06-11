@@ -3,6 +3,7 @@ using collegeApp.MyLogger;
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 builder.Logging.AddDebug();
+builder.Logging.AddConsole();
 
 // Add services to the container.
 
