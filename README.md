@@ -53,6 +53,11 @@ Now it Will accept in xml format as well
 ![image](https://github.com/user-attachments/assets/69753996-28e9-437a-aafa-5e3caabc9d1e)
 
 
+# Entity Framework
+## Need to download the below packages
+![image](https://github.com/user-attachments/assets/7a15aa76-5175-4cb5-9dc2-90153ba5a94c)
+
+
 
  
  
