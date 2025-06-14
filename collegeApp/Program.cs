@@ -1,4 +1,6 @@
+using collegeApp.Data;
 using collegeApp.MyLogger;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
@@ -11,6 +13,10 @@ builder.Services.AddControllers(options=>options.ReturnHttpNotAcceptable=true).A
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<CollegeNewDBContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CollegeDBConnection"));
+});
 
 //builder.Services.AddSingleton<IMyLogger, LogToDB>();
 //builder.Services.AddSingleton<IMyLogger, LogToServerMemory>();

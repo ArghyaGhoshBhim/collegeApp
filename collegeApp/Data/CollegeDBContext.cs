@@ -3,8 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace collegeApp.Data
 {
-    public class CollegeDBContext : DbContext
+    public class CollegeNewDBContext : DbContext
     {
+        public CollegeNewDBContext(DbContextOptions<CollegeNewDBContext> options) : base(options) { }
         DbSet<Student> students { get; set; }
     }
 }
