@@ -82,6 +82,10 @@ Now it Will accept in xml format as well
 ![image](https://github.com/user-attachments/assets/4ee0418c-91a7-4a3c-91fe-b33d51d79b97)
 ![image](https://github.com/user-attachments/assets/8fc650dd-d00c-4cd7-a54f-d2f88f2fc054)
 
+#### Add default data to tables in EF Code First
+![image](https://github.com/user-attachments/assets/8347ae22-e8b8-4179-9c36-51fb2e621b42)
+
+
 
 
 
