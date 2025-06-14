@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using collegeApp.Data;
 
@@ -11,9 +12,11 @@ using collegeApp.Data;
 namespace collegeApp.Migrations
 {
     [DbContext(typeof(CollegeNewDBContext))]
-    partial class CollegeNewDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250614093704_UpdateStudentAndAddedEntity")]
+    partial class UpdateStudentAndAddedEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
