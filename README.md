@@ -63,9 +63,30 @@ Now it Will accept in xml format as well
 
 ![image](https://github.com/user-attachments/assets/6146799b-13e9-47f2-9f6c-d6444c268060)
 
+### Code First
+1. Create Model
+   ![image](https://github.com/user-attachments/assets/2a6d60e8-d68d-49a7-a8ff-a3a657195346)
+2. Create Db context and DbSet
+   ![image](https://github.com/user-attachments/assets/811e2f03-05c5-40b0-923e-515409d5da20)
+3. Configure connection string(we are doing windows authentication)
+   ![image](https://github.com/user-attachments/assets/aa69ab4d-ed1a-4e78-aa4a-d8b7b125b9bf)
+   "ConnectionStrings": {
+  "CollegeDBConnection": "Data Source=ArghyaGhosh;Initial Catalog=CollegeDBProject;Integrated Security=True;Trust Server Certificate=True",
+ }
+4. register DbContext in program.cs
+   ![image](https://github.com/user-attachments/assets/8cbbb1af-c7d2-4eff-9554-199f4205d365)
+
+5. First run 'Add-Migration Initialmigration' command. It will create maigration file.
+6. To update dataBase need to run "Update-Database" command.
+
+![image](https://github.com/user-attachments/assets/4ee0418c-91a7-4a3c-91fe-b33d51d79b97)
+![image](https://github.com/user-attachments/assets/8fc650dd-d00c-4cd7-a54f-d2f88f2fc054)
 
 
 
+
+
+   
  
  
 
