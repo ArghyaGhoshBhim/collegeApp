@@ -1,4 +1,5 @@
-﻿using collegeApp.Model;
+﻿using collegeApp.Data.Config;
+using collegeApp.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace collegeApp.Data
@@ -9,7 +10,7 @@ namespace collegeApp.Data
         DbSet<Student> students { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Student>().HasData(new List<Student>()
+            /*modelBuilder.Entity<Student>().HasData(new List<Student>()
             {
                 new Student()
                 {
@@ -27,9 +28,9 @@ namespace collegeApp.Data
                     Email = "bappa@gmail.com",
                     DOB = new DateTime(2020, 1,12)
                 },
-            });
+            });*/
 
-            modelBuilder.Entity<Student>(entity =>
+            /*modelBuilder.Entity<Student>(entity =>
             {
                 entity.Property(n => n.StudentName).IsRequired();
                 entity.Property(n => n.StudentName).HasMaxLength(50);
@@ -37,7 +38,9 @@ namespace collegeApp.Data
                 entity.Property(n => n.Address).HasMaxLength(50);
                 entity.Property(n => n.Email).IsRequired();
                 entity.Property(n => n.Email).HasMaxLength(60);
-            });
+            });*/
+
+            modelBuilder.ApplyConfiguration(new StudenConfig());
         }
     }
 }
