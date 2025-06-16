@@ -82,6 +82,20 @@ Now it Will accept in xml format as well
 ![image](https://github.com/user-attachments/assets/4ee0418c-91a7-4a3c-91fe-b33d51d79b97)
 ![image](https://github.com/user-attachments/assets/8fc650dd-d00c-4cd7-a54f-d2f88f2fc054)
 
+#### Add default data to tables in EF Code First
+![image](https://github.com/user-attachments/assets/8347ae22-e8b8-4179-9c36-51fb2e621b42)
+
+#### Migrate tables with proper schema Datatype
+![image](https://github.com/user-attachments/assets/c2fa0d66-3891-401b-8b04-cb6518442fce)
+
+![image](https://github.com/user-attachments/assets/c226d0f4-5ce4-4e43-8378-09ebd8d61b99)
+
+![image](https://github.com/user-attachments/assets/a134cad2-d69d-4dc9-82e0-7f56d7da2bcc)
+
+
+
+
+
 
 
 
