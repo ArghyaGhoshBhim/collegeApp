@@ -92,6 +92,19 @@ Now it Will accept in xml format as well
 
 ![image](https://github.com/user-attachments/assets/a134cad2-d69d-4dc9-82e0-7f56d7da2bcc)
 
+#### Creating separate EntityTypeConfiguration file for each table
+1. Create a config file
+![image](https://github.com/user-attachments/assets/1080316c-d336-4cc3-9b0d-f6bbdfb8e4fe)
+
+2. Remove all the configuration from context file
+   ![image](https://github.com/user-attachments/assets/c9ad9058-1853-41c4-ab0c-1de6e7f250b7)
+
+3. Add our new configuration class in the context file
+   
+![image](https://github.com/user-attachments/assets/3cdc15d9-19f1-4c3b-abf4-4a3d7577aa9d)
+
+
+
 
 
 
