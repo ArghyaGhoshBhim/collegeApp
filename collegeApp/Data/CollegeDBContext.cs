@@ -7,7 +7,7 @@ namespace collegeApp.Data
     public class CollegeNewDBContext : DbContext
     {
         public CollegeNewDBContext(DbContextOptions<CollegeNewDBContext> options) : base(options) { }
-        DbSet<Student> students { get; set; }
+        public DbSet<Student> students { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             /*modelBuilder.Entity<Student>().HasData(new List<Student>()
