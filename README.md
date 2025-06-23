@@ -103,6 +103,10 @@ Now it Will accept in xml format as well
    
 ![image](https://github.com/user-attachments/assets/3cdc15d9-19f1-4c3b-abf4-4a3d7577aa9d)
 
+## AsNoTracking in Entity framework
+![image](https://github.com/user-attachments/assets/123d40e1-3c64-4492-bde6-b86a32ff40e7)
+
+
 
 
 
