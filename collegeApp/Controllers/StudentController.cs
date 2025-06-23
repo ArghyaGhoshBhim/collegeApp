@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 
 namespace collegeApp.Controllers
 {
@@ -142,15 +143,22 @@ namespace collegeApp.Controllers
                 return BadRequest();
             }
 
-            var existingStudent = _dbContext.students.Where(s => s.Id == model.Id).FirstOrDefault();
+            var existingStudent = _dbContext.students.AsNoTracking().Where(s => s.Id == model.Id).FirstOrDefault();
             if (existingStudent == null)
             {
                 return NotFound();
             }
 
-            existingStudent.StudentName = model.StudentName;
+            var newRecord = new Student()
+            {
+                Id = existingStudent.Id,
+                StudentName = existingStudent.StudentName,
+                Address = existingStudent.Address,
+            };
+            _dbContext.students.Update(newRecord);
+            /*existingStudent.StudentName = model.StudentName;
             existingStudent.Email = model.Email;
-            existingStudent.Address = model.Address;
+            existingStudent.Address = model.Address;*/
             _dbContext.SaveChanges();
 
             return NoContent();
