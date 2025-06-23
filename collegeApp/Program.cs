@@ -1,3 +1,4 @@
+using collegeApp.Configuration;
 using collegeApp.Data;
 using collegeApp.MyLogger;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ builder.Services.AddControllers(options=>options.ReturnHttpNotAcceptable=true).A
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 builder.Services.AddDbContext<CollegeNewDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("CollegeDBConnection"));
