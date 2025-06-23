@@ -106,6 +106,26 @@ Now it Will accept in xml format as well
 ## AsNoTracking in Entity framework
 ![image](https://github.com/user-attachments/assets/123d40e1-3c64-4492-bde6-b86a32ff40e7)
 
+## Using AutoMapper in Web API
+
+| Step | Action                               |
+| ---- | ------------------------------------ |
+| 1    | Install AutoMapper NuGet packages    |
+| 2    | Create mapping profile(s)            |
+| 3    | Register AutoMapper in `Program.cs`  |
+| 4    | Inject and use `IMapper` in your app |
+
+![image](https://github.com/user-attachments/assets/43de7c33-3130-47d7-90dd-9e4833b792d1)
+
+Documentation: https://docs.automapper.org/en/stable/Configuration.html#profile-instances
+![image](https://github.com/user-attachments/assets/76b75946-8afd-480e-b79d-e9759b915bae)
+![image](https://github.com/user-attachments/assets/311503ec-a563-4650-b46f-c9f48f945618)
+![image](https://github.com/user-attachments/assets/c1bc9978-297b-46ac-b91c-d0860ddf0fe2)
+
+
+
+
+
 
 
 
