@@ -1,4 +1,5 @@
-﻿using collegeApp.Data;
+﻿using AutoMapper;
+using collegeApp.Data;
 using collegeApp.Model;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.JsonPatch;
@@ -15,11 +16,13 @@ namespace collegeApp.Controllers
 
         private readonly ILogger<StudentController> _logger;
         private readonly CollegeNewDBContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public  StudentController(ILogger<StudentController>logger, CollegeNewDBContext dBContext)
+        public  StudentController(ILogger<StudentController>logger, CollegeNewDBContext dBContext, IMapper mapper)
         {
             _logger=logger;
             _dbContext=dBContext;
+            _mapper=mapper;
         }
 
 
@@ -29,14 +32,10 @@ namespace collegeApp.Controllers
         public ActionResult<IEnumerable<StudentDTO>> GetStudents()
         {
             _logger.LogInformation("GetStudents method started");
-            var students = _dbContext.students.Select(s => new StudentDTO()
-            {
-                Id = s.Id,
-                StudentName = s.StudentName,
-                Email = s.Email,
-                Address = s.Address,
-            }).ToList();
-            return Ok(students);
+            var students = _dbContext.students.ToList();
+            var studentDto=_mapper
+                .Map<List<StudentDTO>>(students);
+            return Ok(studentDto);
         }
 
         [HttpGet]
@@ -57,13 +56,7 @@ namespace collegeApp.Controllers
                 _logger.LogError("Student not found with this id");
                 return NotFound();
             }
-            var studentDTO = new StudentDTO()
-            {
-                Id = student.Id,
-                StudentName = student.StudentName,
-                Email = student.Email,
-                Address = student.Address,
-            };
+            var studentDTO = _mapper.Map<StudentDTO>(student);
             return Ok(studentDTO);
         }
 
@@ -77,13 +70,7 @@ namespace collegeApp.Controllers
             {
                 return NotFound();
             }
-            var studentDTO = new StudentDTO()
-            {
-                Id = student.Id,
-                StudentName = student.StudentName,
-                Email = student.Email,
-                Address = student.Address,
-            };
+            var studentDTO = _mapper.Map<StudentDTO>(student);
 
             return Ok(studentDTO);
         }
@@ -119,12 +106,7 @@ namespace collegeApp.Controllers
             {
                 return BadRequest();
             }
-            var student = new Student()
-            {
-                StudentName = model.StudentName,
-                Email = model.Email,
-                Address = model.Address,
-            };
+            var student = _mapper.Map<Student>(model);
             model.Id = student.Id;
             _dbContext.students.Add(student);
             _dbContext.SaveChanges();
@@ -177,19 +159,13 @@ namespace collegeApp.Controllers
                 return BadRequest();
             }
 
-            var existingStudent = _dbContext.students.Where(s => s.Id == id).FirstOrDefault();
+            var existingStudent = _dbContext.students.AsNoTracking().Where(s => s.Id == id).FirstOrDefault();
             if (existingStudent == null)
             {
                 return NotFound();
             }
 
-            var studentDto=new StudentDTO()
-            {
-                Id = id,
-                StudentName=existingStudent.StudentName,
-                Email=existingStudent.Email,
-                Address=existingStudent.Address,
-            };
+            var studentDto=_mapper.Map<StudentDTO>(existingStudent);
 
             patchDocument.ApplyTo(studentDto, ModelState);
 
@@ -198,9 +174,12 @@ namespace collegeApp.Controllers
                 return BadRequest();
             }
 
-            existingStudent.StudentName = studentDto.StudentName;
+            existingStudent=_mapper.Map<Student>(studentDto);
+            /*existingStudent.StudentName = studentDto.StudentName;
             existingStudent.Email = studentDto.Email;
-            existingStudent.Address = studentDto.Address;
+            existingStudent.Address = studentDto.Address;*/
+
+            _dbContext.students.Update(existingStudent);
             _dbContext.SaveChanges();
 
             return NoContent();
