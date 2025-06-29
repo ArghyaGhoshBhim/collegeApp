@@ -144,6 +144,21 @@ Documentation: https://docs.automapper.org/en/stable/Configuration.html#profile-
 
 ![image](https://github.com/user-attachments/assets/dcc3699d-7067-4864-bf3b-242283af35db)
 
+# Repository design pattern in Web API
+
+![image](https://github.com/user-attachments/assets/3091b039-a740-4fa3-8770-5bd9ed36a1c1)
+
+![image](https://github.com/user-attachments/assets/ba85e632-b1ef-4556-b3d4-bb6fd6cd71ec)
+![image](https://github.com/user-attachments/assets/db22cef7-6e36-4028-ae35-25bd4cb3e347)
+
+![image](https://github.com/user-attachments/assets/3b064b88-cf0a-4dea-9701-2c5a32635081)
+but we will not create diff repository instead we will create a common repository
+![image](https://github.com/user-attachments/assets/5fd17a18-69ea-4121-9336-622051f03731)
+
+
+
+
+
 
 
 
