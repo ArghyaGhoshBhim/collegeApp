@@ -122,6 +122,16 @@ Documentation: https://docs.automapper.org/en/stable/Configuration.html#profile-
 ![image](https://github.com/user-attachments/assets/311503ec-a563-4650-b46f-c9f48f945618)
 ![image](https://github.com/user-attachments/assets/c1bc9978-297b-46ac-b91c-d0860ddf0fe2)
 
+## Auto mapper with different property names, ignore, transform
+![image](https://github.com/user-attachments/assets/b769c93c-6e7d-4879-b4d0-fa9e024acb37)
+![image](https://github.com/user-attachments/assets/0c0a59b6-3f14-4529-8a27-ecb55eafcf9c)
+
+![image](https://github.com/user-attachments/assets/e40a8633-bad4-4199-af69-36b023bd8421)
+![image](https://github.com/user-attachments/assets/d184c927-6418-449b-a55f-b200dd06dc7d)
+
+
+
+
 
 
 
