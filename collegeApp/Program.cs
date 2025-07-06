@@ -1,5 +1,6 @@
 using collegeApp.Configuration;
 using collegeApp.Data;
+using collegeApp.Data.Repository;
 using collegeApp.MyLogger;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,12 +10,13 @@ builder.Logging.AddDebug();
 builder.Logging.AddConsole();
 
 // Add services to the container.
-
+builder.Services.AddTransient<IStudentRepository, StudentRepository>();
 builder.Services.AddControllers(options=>options.ReturnHttpNotAcceptable=true).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
+
 builder.Services.AddDbContext<CollegeNewDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("CollegeDBConnection"));

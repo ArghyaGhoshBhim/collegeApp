@@ -38,10 +38,20 @@ namespace collegeApp.Data.Repository
             return await _dbContext.students.ToListAsync();
         }
 
-        public async Task<Student> GetById(int id)
+        public async Task<Student> GetById(int id, bool isNoTracking=false)
         {
-            var student = await _dbContext.students.FirstOrDefaultAsync(student => student.Id == id);
-            return student;
+
+
+            if (isNoTracking)
+            {
+                return await _dbContext.students.AsNoTracking().FirstOrDefaultAsync(student => student.Id == id);
+            }
+            else
+            {
+                return await _dbContext.students.FirstOrDefaultAsync(student => student.Id == id);
+            }
+            
+          
         }
 
         public async Task<Student> GetByName(string name)
@@ -52,14 +62,9 @@ namespace collegeApp.Data.Repository
 
         public async Task<int> Update(Student student)
         {
-            var studentToUpdate=await _dbContext.students.FirstOrDefaultAsync(ele=>ele.Id==student.Id);
-            if (studentToUpdate == null) throw new ArgumentNullException("Student is not valid");
-            studentToUpdate.StudentName = student.StudentName;
-            studentToUpdate.Email = student.Email;
-            studentToUpdate.Address = student.Address;
-            studentToUpdate.DOB = student.DOB;
+            _dbContext.Update(student);
             await _dbContext.SaveChangesAsync();
-            return studentToUpdate.Id; 
+            return student.Id; 
         }
     }
 }
