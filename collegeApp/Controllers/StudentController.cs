@@ -18,9 +18,10 @@ namespace collegeApp.Controllers
         private readonly ILogger<StudentController> _logger;
         private readonly CollegeNewDBContext _dbContext;
         private readonly IMapper _mapper;
-        private readonly IStudentRepository _studentRepository;
+        //private readonly IStudentRepository _studentRepository;
+        private readonly ICollegeRepository<Student> _studentRepository;
 
-        public  StudentController(ILogger<StudentController>logger, CollegeNewDBContext dBContext, IMapper mapper, IStudentRepository studentRepository)
+        public  StudentController(ILogger<StudentController>logger, CollegeNewDBContext dBContext, IMapper mapper, ICollegeRepository<Student> studentRepository)
         {
             _logger=logger;
             _dbContext=dBContext;
@@ -53,7 +54,7 @@ namespace collegeApp.Controllers
                 _logger.LogError("Bad request");
                 return BadRequest();
             }
-            var student = await _studentRepository.GetById(id);
+            var student = await _studentRepository.GetById(student=>student.Id==id);
             if (student == null)
             {
                 _logger.LogError("Student not found with this id");
@@ -68,7 +69,7 @@ namespace collegeApp.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<StudentDTO>> GeStudentByName(string name)
         {
-            var student = await _studentRepository.GetByName(name);
+            var student = await _studentRepository.GetByName(student=>student.StudentName.ToLower().Contains(name.ToLower()));
             if (student == null)
             {
                 return NotFound();
@@ -87,7 +88,8 @@ namespace collegeApp.Controllers
             {
                 return BadRequest();
             }
-            var isDeleted = await _studentRepository.Delete(id);
+            var student = await _studentRepository.GetById(student => student.Id == id);
+            var isDeleted = await _studentRepository.Delete(student);
           
             return Ok(isDeleted);
         }
@@ -106,8 +108,8 @@ namespace collegeApp.Controllers
             }
             var student = _mapper.Map<Student>(model);
             model.Id = student.Id;
-            var createdId=await _studentRepository.Create(student);
-            return CreatedAtRoute("GetStudentById", new { Id = createdId }, model);
+            var StudentCreatedId=await _studentRepository.Create(student);
+            return CreatedAtRoute("GetStudentById", new { Id = StudentCreatedId.Id }, model);
         }
 
 
@@ -122,7 +124,7 @@ namespace collegeApp.Controllers
                 return BadRequest();
             }
 
-            var existingStudent =await _studentRepository.GetById(model.Id, true);
+            var existingStudent =await _studentRepository.GetById(studen=>studen.Id==model.Id, true);
             if (existingStudent == null)
             {
                 return NotFound();
@@ -159,7 +161,7 @@ namespace collegeApp.Controllers
             }
 
             //var existingStudent = _dbContext.students.AsNoTracking().Where(s => s.Id == id).FirstOrDefault();
-            var existingStudent = await _studentRepository.GetById(id);
+            var existingStudent = await _studentRepository.GetById(studen => studen.Id ==id, true);
             if (existingStudent == null)
             {
                 return NotFound();
