@@ -3,68 +3,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace collegeApp.Data.Repository
 {
-    public class StudentRepository : IStudentRepository
+    public class StudentRepository :CollegeRepository<Student>, IStudentRepository
     {
+
         private readonly CollegeNewDBContext _dbContext;
-        public StudentRepository(CollegeNewDBContext dBContext) {
+        public StudentRepository(CollegeNewDBContext dBContext) : base(dBContext) {
             _dbContext = dBContext;
         }
 
-        public async Task<int> Create(Student student)
+        public Task<List<Student>> GetStudentsByFreeStatusAsync(int feeStatus)
         {
-            if (student == null)
-                throw new ArgumentNullException("Student is not valid");
-            
-            await _dbContext.AddAsync(student);
-            await _dbContext.SaveChangesAsync();
-            return student.Id;
-        }
-
-        public async Task<bool> Delete(int id)
-        {
-            var student = await _dbContext.students.FirstOrDefaultAsync(x => x.Id == id);
-            if(student == null)
-            {
-                return false;
-            }
-            _dbContext.students.Remove(student);
-            await _dbContext.SaveChangesAsync();
-            return true;
-
-        }
-
-        public async Task<List<Student>> GetALL()
-        {
-            return await _dbContext.students.ToListAsync();
-        }
-
-        public async Task<Student> GetById(int id, bool isNoTracking=false)
-        {
-
-
-            if (isNoTracking)
-            {
-                return await _dbContext.students.AsNoTracking().FirstOrDefaultAsync(student => student.Id == id);
-            }
-            else
-            {
-                return await _dbContext.students.FirstOrDefaultAsync(student => student.Id == id);
-            }
-            
-          
-        }
-
-        public async Task<Student> GetByName(string name)
-        {
-            var student = await _dbContext.students.FirstOrDefaultAsync(student => student.StudentName.ToLower().Equals(name.ToLower()));
-            return student;
-        }
-
-        public async Task<int> Update(Student student)
-        {
-            _dbContext.Update(student);
-            await _dbContext.SaveChangesAsync();
-            return student.Id; 
+            return null;
         }
     }
 }
