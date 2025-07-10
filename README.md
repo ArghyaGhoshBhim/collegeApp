@@ -155,6 +155,11 @@ Documentation: https://docs.automapper.org/en/stable/Configuration.html#profile-
 but we will not create diff repository instead we will create a common repository
 ![image](https://github.com/user-attachments/assets/5fd17a18-69ea-4121-9336-622051f03731)
 
+## Creating Foreign Key in Entity Framework code first in Web API
+
+<img width="2263" height="916" alt="image" src="https://github.com/user-attachments/assets/232a9750-87c5-4036-8acf-dbf1273322aa" />
+<img width="984" height="398" alt="image" src="https://github.com/user-attachments/assets/18f8dbe3-f45e-489a-a983-6cee56e52459" />
+<img width="818" height="264" alt="image" src="https://github.com/user-attachments/assets/78ca1137-268a-44c4-bc27-9be3aacecef7" />
 
 
 
