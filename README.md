@@ -162,6 +162,20 @@ but we will not create diff repository instead we will create a common repositor
 <img width="818" height="264" alt="image" src="https://github.com/user-attachments/assets/78ca1137-268a-44c4-bc27-9be3aacecef7" />
 
 
+## CORS - Cross Origin Resource Sharing
+
+<img width="2176" height="962" alt="image" src="https://github.com/user-attachments/assets/97ea508d-0c28-4b45-8da9-2dff4b7d2b43" />
+<img width="2004" height="931" alt="image" src="https://github.com/user-attachments/assets/be70a1ac-bde9-4e49-89e7-b49d6398a15b" />
+<img width="2104" height="995" alt="image" src="https://github.com/user-attachments/assets/cbfc08fe-b640-476c-9f85-49da59ebe438" />
+<img width="2721" height="1480" alt="image" src="https://github.com/user-attachments/assets/71650999-e7f3-4003-a055-eee6c9c8b547" />
+<img width="2672" height="1046" alt="image" src="https://github.com/user-attachments/assets/4340e54f-5e3a-459e-94a0-a1d4e9fd57c9" />
+<img width="2660" height="1063" alt="image" src="https://github.com/user-attachments/assets/f04ef6a3-4ce2-417a-b30b-6c183dc13de8" />
+
+
+
+
+
+
 
 
 
