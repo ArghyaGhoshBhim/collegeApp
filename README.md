@@ -172,6 +172,18 @@ but we will not create diff repository instead we will create a common repositor
 <img width="2660" height="1063" alt="image" src="https://github.com/user-attachments/assets/f04ef6a3-4ce2-417a-b30b-6c183dc13de8" />
 
 
+## CORS Scenarios
+<img width="2058" height="1013" alt="image" src="https://github.com/user-attachments/assets/7853537c-8f25-4c72-a26f-4be77e37f2f1" />
+<img width="2049" height="1001" alt="image" src="https://github.com/user-attachments/assets/2ac31512-b95f-4bc6-8a18-7152c05f3eab" />D
+<img width="1846" height="1056" alt="image" src="https://github.com/user-attachments/assets/9eea7f62-3b3f-4c9f-a03a-594bb9f7a064" />
+<img width="2052" height="1148" alt="image" src="https://github.com/user-attachments/assets/4e0d63bf-2464-469d-876e-a3d7573cdefc" />
+
+<img width="1934" height="821" alt="image" src="https://github.com/user-attachments/assets/41f22731-d006-45b2-87a3-8b195f2d6dba" />
+when method type option that is a pre-flighted request
+<img width="1984" height="1088" alt="image" src="https://github.com/user-attachments/assets/fc082ee6-1183-4638-8b0c-5df43158694b" />
+<img width="2008" height="1120" alt="image" src="https://github.com/user-attachments/assets/a35b11f9-5111-4e8f-a82b-1e4c68e9e9e5" />
+main request will cancel
+
 
 
 
