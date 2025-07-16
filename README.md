@@ -185,6 +185,18 @@ when method type option that is a pre-flighted request
 main request will cancel
 
 
+## Enabling CORS in Web API
+
+#### Allow all origin
+<img width="1758" height="572" alt="image" src="https://github.com/user-attachments/assets/5f5ff342-04a3-4625-9958-37484894212c" />
+<img width="1598" height="656" alt="image" src="https://github.com/user-attachments/assets/0f5eb247-679b-4298-a0c9-c79c239bf334" />
+<img width="1772" height="772" alt="image" src="https://github.com/user-attachments/assets/4cd5013d-1174-4ccb-b2d3-af28fc4eea4b" />
+
+
+#### Allow only few origin
+<img width="1586" height="418" alt="image" src="https://github.com/user-attachments/assets/7a555176-6469-4cc5-a053-99b326337af3" />
+<img width="1978" height="862" alt="image" src="https://github.com/user-attachments/assets/93d5661d-ab82-4c10-a3ff-621071ba3559" />
+
 
 
 
