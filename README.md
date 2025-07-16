@@ -185,7 +185,7 @@ when method type option that is a pre-flighted request
 main request will cancel
 
 
-## Enabling CORS in Web API
+## Enabling CORS in Web API using middleware
 
 #### Allow all origin
 <img width="1758" height="572" alt="image" src="https://github.com/user-attachments/assets/5f5ff342-04a3-4625-9958-37484894212c" />
