@@ -240,6 +240,11 @@ main request will cancel
 <img width="1990" height="1117" alt="image" src="https://github.com/user-attachments/assets/ab2557ce-5217-446f-b89c-562402e215dd" />
 
 
+#### Algorithms used in JWT
+
+<img width="1802" height="915" alt="image" src="https://github.com/user-attachments/assets/16478ad8-18bc-407f-967e-961226dc87c3" />
+
+<img width="1797" height="815" alt="image" src="https://github.com/user-attachments/assets/bdc0ecc6-4d25-4c1c-9c19-467cb0e3541c" />
 
 
 
