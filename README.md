@@ -1,4 +1,4 @@
-# Content negotiation in Web/REST API:
+<img width="1969" height="781" alt="image" src="https://github.com/user-attachments/assets/bbe35250-9afc-40c2-912d-886470c6f52c" /># Content negotiation in Web/REST API:
 we acn restrict the content return type
 ![image](https://github.com/user-attachments/assets/53bbb292-9527-49c8-819b-03fb09d073cf)
 ![image](https://github.com/user-attachments/assets/6f60729f-d649-4ae8-8f5e-67349b950d3e)
@@ -204,9 +204,40 @@ main request will cancel
 <img width="1787" height="568" alt="image" src="https://github.com/user-attachments/assets/c18de28f-715d-4373-9519-5df260a70db0" />
 <img width="1830" height="821" alt="image" src="https://github.com/user-attachments/assets/da031d31-5774-4f96-a6b8-7c353f2ba288" />
 
+<img width="1941" height="964" alt="image" src="https://github.com/user-attachments/assets/d4921458-e536-4dcb-be5c-09f1847df3ac" />
 
+#### JWT token have three things Header, Payload and Signature
+- :rocket: It's also possible sometime jwt doesn't contain the signature that we call it jwt is not secured
+<img width="1958" height="1084" alt="image" src="https://github.com/user-attachments/assets/b808dd30-2fea-49e3-8b00-8d350a3d8d9f" />
 
+🚀 Header mainly use for what algorithm use to validate and encript the token and another this Type 
+<img width="1953" height="956" alt="image" src="https://github.com/user-attachments/assets/d910d56f-670b-4b01-9a4f-10de10f780de" />
 
+🚀We can pass empty payload as well
+<img width="1962" height="833" alt="image" src="https://github.com/user-attachments/assets/2aab0106-ba54-47e4-a3ed-24bd24262cd5" />
+
+🚀JWT-Signature
+<img width="1970" height="961" alt="image" src="https://github.com/user-attachments/assets/40cdf9f8-f7e8-42dc-ba07-ef78883472b1" />
+
+🚀 Base64 encoded is important here 👿
+<img width="1969" height="781" alt="image" src="https://github.com/user-attachments/assets/b7dff50b-ec97-45e7-8dfe-72c22ddbd147" />
+
+🚀Token Generation
+<img width="2856" height="1545" alt="image" src="https://github.com/user-attachments/assets/af562af1-5938-4739-8a25-943aa660a0e9" />
+
+✅ What is the Signature?
+  The signature is created by signing the header and payload using a secret (or private key) and a signing algorithm (e.g., HMAC SHA256).
+<pre> ``` HMACSHA256(
+  base64UrlEncode(header) + "." + base64UrlEncode(payload), 
+  secret_key
+) ``` </pre>
+
+📌 Purpose of the Signature:
+- Verify the token’s authenticity – ensures it was issued by a trusted source.
+- Detect tampering – if the payload or header is changed, the signature won't match, so the token is invalid.
+- Secure data transmission – although JWTs are not encrypted by default, the signature ensures data wasn't altered
+
+<img width="1990" height="1117" alt="image" src="https://github.com/user-attachments/assets/ab2557ce-5217-446f-b89c-562402e215dd" />
 
 
 
