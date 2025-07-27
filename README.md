@@ -198,6 +198,14 @@ main request will cancel
 <img width="1978" height="862" alt="image" src="https://github.com/user-attachments/assets/93d5661d-ab82-4c10-a3ff-621071ba3559" />
 
 
+## Web API Security Using JWT Authentication
+
+<img width="1812" height="566" alt="image" src="https://github.com/user-attachments/assets/33079384-1daf-410b-9977-1e030e66cd0b" />
+<img width="1787" height="568" alt="image" src="https://github.com/user-attachments/assets/c18de28f-715d-4373-9519-5df260a70db0" />
+<img width="1830" height="821" alt="image" src="https://github.com/user-attachments/assets/da031d31-5774-4f96-a6b8-7c353f2ba288" />
+
+
+
 
 
 
