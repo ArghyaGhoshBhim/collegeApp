@@ -247,6 +247,29 @@ main request will cancel
 <img width="1797" height="815" alt="image" src="https://github.com/user-attachments/assets/bdc0ecc6-4d25-4c1c-9c19-467cb0e3541c" />
 
 
+<img width="2099" height="817" alt="image" src="https://github.com/user-attachments/assets/9bbda956-828d-498a-899c-38e128274d23" />
+
+### If we add [Authorize] annotation add to controller  we are making it sequre end points
+
+<img width="2023" height="617" alt="image" src="https://github.com/user-attachments/assets/a77bb891-fc8c-494e-8ada-204a9d8c4cf3" />
+
+#### if we don't want's any restriction
+<img width="2080" height="1018" alt="image" src="https://github.com/user-attachments/assets/93c5ec5c-e955-4c66-aada-b3e9b211eff2" />
+
+| Method     | Use When                       |
+| ---------- | ------------------------------ |
+| `Roles`    | Simple admin/user separation   |
+| `Policies` | When you need to combine rules |
+| `Claims`   | When identity has rich data    |
+| `Handlers` | For complex, contextual logic  |
+
+
+### Sectret key reading from config
+<img width="1885" height="528" alt="image" src="https://github.com/user-attachments/assets/b11897fb-69fa-41e8-b6ee-05064e1c40dd" />
+<img width="2761" height="1180" alt="image" src="https://github.com/user-attachments/assets/fb813642-f2ff-4439-b6e8-f102ee466399" />
+
+
+
 
 
 
