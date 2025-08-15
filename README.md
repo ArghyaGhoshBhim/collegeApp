@@ -269,6 +269,16 @@ main request will cancel
 <img width="2761" height="1180" alt="image" src="https://github.com/user-attachments/assets/fb813642-f2ff-4439-b6e8-f102ee466399" />
 
 
+### Pre-requisites for JWT
+1. Microsoft.AspNetCore.Authentication.JwtBearer
+
+#### This controler is sequre now and here we have allowed admin and Superadmin to access this aplication
+<img width="916" height="378" alt="image" src="https://github.com/user-attachments/assets/a762ba14-f8f9-4aa9-81bb-c45a6ebcdd3c" />
+
+#### [AllowAnonymous]
+This method only allow this particular method access without any authentication
+<img width="994" height="278" alt="image" src="https://github.com/user-attachments/assets/f676b4d2-a718-4969-951c-5462874b2b8b" />
+
 
 
 
