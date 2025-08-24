@@ -2,6 +2,7 @@
 using collegeApp.Data;
 using collegeApp.Data.Repository;
 using collegeApp.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ namespace collegeApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Superadmin, Admin")]
     public class StudentController : Controller
     {
 
@@ -33,6 +35,7 @@ namespace collegeApp.Controllers
         [HttpGet]
         [Route("All", Name = "GetStudents")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudents()
         {
             _logger.LogInformation("GetStudents method started");

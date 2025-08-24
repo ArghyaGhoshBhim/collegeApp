@@ -39,6 +39,7 @@ namespace collegeApp.Data.Config
                 },
             });
 
+            builder.HasOne(n=>n.Department).WithMany(n=>n.Students).HasForeignKey(x => x.DepartmentId).HasConstraintName("FK_Students_Department");
         }
     }
 }
