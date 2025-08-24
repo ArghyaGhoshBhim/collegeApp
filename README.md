@@ -277,10 +277,21 @@ main request will cancel
 
 #### [AllowAnonymous]
 This method only allow this particular method access without any authentication
-<img width="994" height="278" alt="image" src="https://github.com/user-attachments/assets/f676b4d2-a718-4969-951c-5462874b2b8b" />
+<img width="994" height="278" alt="image" src="https://github.com/user-attachments/assets/f676b4d2-a718-4969-951c-5462874b2b8b" />\
 
 
+#### Part 72 Configuring Web API to use JWT
+<img width="1704" height="930" alt="image" src="https://github.com/user-attachments/assets/8efc23fa-9cb0-4aa3-ad3d-988c95cc656e" />
 
+📓 Note: the above we are getting 500 error
+*** we can add jwt in two diff way 
+DEFAULT and NAME way.
+
+##### Default: -😃
+<img width="1239" height="376" alt="image" src="https://github.com/user-attachments/assets/40b50031-458a-49a5-9e47-a310b4380db0" />
+<img width="1326" height="524" alt="image" src="https://github.com/user-attachments/assets/7388db7f-6549-4540-90e8-dd10f6ee2879" />
+
+📓Note: now after registering token in program file we are getting 401(unauthorize)
 
 
 
