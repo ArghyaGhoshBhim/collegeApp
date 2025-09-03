@@ -295,6 +295,45 @@ DEFAULT and NAME way.
 
 
 
+## 73 Generating JWT token
+we have to total 5 step
+### Validate the Input(1)
+If the user didn’t send username/password, return 400 BadRequest.
+### Check Credentials(2)
+* For demo, we hardcoded admin/password123
+* In real projects, validate against database or ASP.NET Identity.
+* If wrong → return 401 Unauthorized.
+### Create Claims(3)
+* Claims are user-related info stored inside the token
+* Example: username, unique ID, role.
+* Later you can read them in secured endpoints.
+
+<pre>var claims = new[]
+{
+    new Claim(JwtRegisteredClaimNames.Sub, model.Username),
+    //new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+    new Claim("role", "Admin")
+};</pre>
+
+### Generate Security Key & Credentials(4)
+* A secret key (_jwtSecret) is used to sign the token.
+* It must be long, random, and stored safely (usually in appsettings.json).
+<pre> var key = Encoding.ASCII.GetBytes(_config.GetValue<string>("JWTSecret")) ;
+ var creds=new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.Aes128CbcHmacSha256);</pre>
+
+### Build the JWT Token(5)
+* JwtSecurityToken is created with:
+      * `issuer` & `audience` → who created & who can use it.
+      * `claims` → user info.
+      * `expires` → when token becomes invalid.
+      * `signingCredentials` → to prevent tampering.
+  <pre>var token = new JwtSecurityToken(issuer: "yourapp.com",audience: "yourapp.com",claims: claims,expires: DateTime.UtcNow.AddHours(1), // token validitysigningCredentials: creds);</pre>
+
+### Return the Token(6)
+* Return 200 OK with `token` and `expiration`.
+* The frontend will store this token (usually in localStorage or cookies).
+
+<img width="1226" height="786" alt="image" src="https://github.com/user-attachments/assets/55195344-01a0-4571-8279-404666e9c1f0" />
 
 
 
