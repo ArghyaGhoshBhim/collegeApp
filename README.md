@@ -335,6 +335,7 @@ If the user didn’t send username/password, return 400 BadRequest.
 
 <img width="1226" height="786" alt="image" src="https://github.com/user-attachments/assets/55195344-01a0-4571-8279-404666e9c1f0" />
 
+<img width="1078" height="863" alt="image" src="https://github.com/user-attachments/assets/1b456edb-94a1-451f-b91b-c1168555d160" />
 
 
 
