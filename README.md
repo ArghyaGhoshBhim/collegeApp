@@ -333,17 +333,69 @@ If the user didn’t send username/password, return 400 BadRequest.
 * Return 200 OK with `token` and `expiration`.
 * The frontend will store this token (usually in localStorage or cookies).
 
-<img width="1226" height="786" alt="image" src="https://github.com/user-attachments/assets/55195344-01a0-4571-8279-404666e9c1f0" />
+<img width="972" height="828" alt="image" src="https://github.com/user-attachments/assets/390d8151-8862-487e-a7f7-f5245541dad8" />
 
 <img width="1078" height="863" alt="image" src="https://github.com/user-attachments/assets/1b456edb-94a1-451f-b91b-c1168555d160" />
 
 
+## Configure authentication in Swagger
+<img width="949" height="537" alt="image" src="https://github.com/user-attachments/assets/91f9012e-c085-4fcf-b81e-b704e4683874" />
 
 
+```csharp
+options.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "V1" });
+```
+* Registers a Swagger/OpenAPI document named v1.
+
+* Displays title/version in Swagger UI.
+
+```csharp
+options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme { ... });
+```
+* Adds a named security definition called "Bearer".
+* Defines how users will supply credentials in the UI.
+
+### Inside the `OpenApiSecurityScheme`
+
+- **Name = "Authorization"**  
+  The HTTP header name Swagger sets. Must match what your API expects (usually `Authorization`).
+
+- **Type = SecuritySchemeType.ApiKey**  
+  Means the credential is passed as a header or query parameter.  
+  ⚠️ Alternative (preferred for JWT): `SecuritySchemeType.Http` with `Scheme = "bearer"`.
+
+- **Scheme = "Bearer"**  
+  Metadata about scheme. If using `Http`, set this to `"bearer"` (lowercase).
+
+- **BearerFormat = "JWT"**  
+  Documentation hint that the token is a JWT. No functional effect.
+
+- **In = ParameterLocation.Header**  
+  Specifies that the credential goes into the HTTP header.
+
+- **Description**  
+  Message shown in Swagger’s **Authorize** dialog.  
+  Example: `Bearer 12345abcdef`.  
+  Important to clarify whether users should paste the token only, or the token prefixed with `"Bearer "`.  
 
 
-
-
+```csharp
+options.AddSecurityRequirement(new OpenApiSecurityRequirement {
+    {
+        new OpenApiSecurityScheme {
+            Reference = new OpenApiReference {
+                Type = ReferenceType.SecurityScheme,
+                Id = "Bearer"
+            }
+        },
+        new string[] {}
+    }
+});
+```
+* Declares that the "Bearer" security definition is required.
+* Applied at the document level → Swagger UI enforces this for all operations.
+* The empty string array is for OAuth scopes (not used here).
+* Effect: Enables the Authorize button in Swagger UI. After authorization, Swagger attaches the JWT header automatically to all requests.
 
 
 
