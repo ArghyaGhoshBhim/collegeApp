@@ -398,14 +398,92 @@ options.AddSecurityRequirement(new OpenApiSecurityRequirement {
 * Effect: Enables the Authorize button in Swagger UI. After authorization, Swagger attaches the JWT header automatically to all requests.
 
 
+## Multiple JWT Authentication in ASP.NET Core Web API
+📌 Purpose
+* Sometimes an API needs to accept tokens from multiple issuers or clients.
+- Example scenarios:
+-  * Supporting different applications with separate keys.
+   * Migrating from an old identity provider to a new one.
+   * Allowing internal vs external authentication sources.
+* Multiple JWT schemes let you configure different validation rules (issuer, audience, signing key) within the same API.
+
+  
+⚙️ Configuration
+#### 1. Add authentication with multiple schemes
+```csharpusing Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Load keys from configuration
+var jwtKey1 = Encoding.UTF8.GetBytes(builder.Configuration["JWTSecret1"]);
+var jwtKey2 = Encoding.UTF8.GetBytes(builder.Configuration["JWTSecret2"]);
+
+builder.Services.AddAuthentication()
+    .AddJwtBearer("Scheme1", options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = "issuer1.com",
+            ValidateAudience = true,
+            ValidAudience = "audience1",
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(jwtKey1),
+            ValidateLifetime = true
+        };
+    })
+    .AddJwtBearer("Scheme2", options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = "issuer2.com",
+            ValidateAudience = true,
+            ValidAudience = "audience2",
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(jwtKey2),
+            ValidateLifetime = true
+        };
+    });
+
+var app = builder.Build();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
+app.Run();
+```
+
+#### 2. Use [Authorize] with a specific scheme
+
+```csharp [Authorize(AuthenticationSchemes = "Scheme1")]
+[HttpGet("data-from-scheme1")]
+public IActionResult GetDataFromScheme1() => Ok("Valid Scheme1 token");
+
+[Authorize(AuthenticationSchemes = "Scheme2")]
+[HttpGet("data-from-scheme2")]
+public IActionResult GetDataFromScheme2() => Ok("Valid Scheme2 token");
+```
+* If no scheme is specified, the default scheme applies.
+* If multiple schemes are required, you can pass a comma-separated list:
+   ```csharp [Authorize(AuthenticationSchemes = "Scheme1,Scheme2")]```
+
+#### 🔑 Important Notes
+* Each scheme can have its own issuer, audience, signing key, and lifetime rules.
+* Good practice: name schemes clearly (e.g., InternalAuth, ExternalAuth) instead of "Scheme1".
+
+  <img width="1058" height="316" alt="image" src="https://github.com/user-attachments/assets/0d5477d7-f19d-4711-a793-0a9cd0ba90fb" />
+  <img width="1132" height="864" alt="image" src="https://github.com/user-attachments/assets/881df26e-3f9d-4d52-8ca1-bfaae2b1584f" />
+  <img width="1026" height="382" alt="image" src="https://github.com/user-attachments/assets/d9e6fe45-0cf2-4640-8836-030aea4d333c" />
+  <img width="1118" height="862" alt="image" src="https://github.com/user-attachments/assets/756f5aed-ae27-4b1e-aad6-2f32319b62d0" />
+  <img width="1060" height="432" alt="image" src="https://github.com/user-attachments/assets/e22935ad-772f-46c5-b88c-182eab2b4c96" />
+  <img width="1112" height="498" alt="image" src="https://github.com/user-attachments/assets/39ad4fac-9a25-48f4-bf49-4748f4d69511" />
 
 
 
 
 
-
-
-   
  
  
 
