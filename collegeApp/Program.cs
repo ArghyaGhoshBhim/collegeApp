@@ -65,7 +65,7 @@ builder.Services.AddDbContext<CollegeNewDBContext>(options =>
 builder.Services.AddSingleton<IMyLogger, LogToFile>();
 
 // ? JWT Authentication setup
-var key = Encoding.ASCII.GetBytes(builder.Configuration.GetValue<string>("JWTSecret"));
+/*var key = Encoding.ASCII.GetBytes(builder.Configuration.GetValue<string>("JWTSecret"));
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -79,7 +79,44 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuer = false,
             ValidateAudience = false
         };
-    });
+    });*/
+
+var keyJWTSecretLocal = Encoding.ASCII.GetBytes(builder.Configuration.GetValue<string>("JWTSecretLocal"));
+var keyJWTSecretGoogle = Encoding.ASCII.GetBytes(builder.Configuration.GetValue<string>("JWTSecretGoogle"));
+var keyJWTSecretMicrosoft = Encoding.ASCII.GetBytes(builder.Configuration.GetValue<string>("JWTSecretMicroshoft"));
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer("LocalSchemes", options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(keyJWTSecretLocal),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+    };
+}).AddJwtBearer("GoogleSchemes", options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateAudience = false,
+        ValidateIssuer = false,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(keyJWTSecretGoogle)
+    };
+}).AddJwtBearer("MicrosoftSchemes", options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(keyJWTSecretMicrosoft),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
 
 var app = builder.Build();
 

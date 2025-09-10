@@ -34,7 +34,19 @@ namespace collegeApp.Controllers
                     new Claim("role", "Admin")
                 };
 
-                var key = Encoding.ASCII.GetBytes(_config.GetValue<string>("JWTSecret"));
+                //var key = Encoding.ASCII.GetBytes(_config.GetValue<string>("JWTSecret"));
+                byte[] key=null;
+                if(model.Policy == "Google")
+                {
+                    key = Encoding.ASCII.GetBytes(_config.GetValue<string>("JWTSecretGoogle"));
+                }else if(model.Policy == "Microsoft")
+                {
+                    key = Encoding.ASCII.GetBytes(_config.GetValue<string>("JWTSecretMicroshoft"));
+                }else if (model.Policy == "Local")
+                {
+                    key = Encoding.ASCII.GetBytes(_config.GetValue<string>("JWTSecretLocal"));
+                }
+
                 var creds = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
 
                 var token = new JwtSecurityToken(

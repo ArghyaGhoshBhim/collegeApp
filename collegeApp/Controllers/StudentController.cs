@@ -13,7 +13,7 @@ namespace collegeApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Superadmin, Admin")]
+    [Authorize(AuthenticationSchemes = "LocalSchemes", Roles = "Superadmin, Admin")]
     public class StudentController : Controller
     {
 
