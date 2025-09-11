@@ -481,6 +481,21 @@ public IActionResult GetDataFromScheme2() => Ok("Valid Scheme2 token");
   <img width="1112" height="498" alt="image" src="https://github.com/user-attachments/assets/39ad4fac-9a25-48f4-bf49-4748f4d69511" />
 
 
+## Why we need issuer & audience in JWT in Web API 
+
+<img width="1874" height="977" alt="image" src="https://github.com/user-attachments/assets/19d7854d-41d8-4081-a74e-857b848bf0a0" />
+<img width="1856" height="974" alt="image" src="https://github.com/user-attachments/assets/ffd5c6c0-77e3-4824-9e9f-7233d32fb686" />
+<img width="1867" height="961" alt="image" src="https://github.com/user-attachments/assets/88295073-a9c4-4c70-84a4-80d804555473" />
+
+<img width="1114" height="350" alt="image" src="https://github.com/user-attachments/assets/ea5ba3e2-68a3-4a05-bcf7-c7a9813aabab" />
+<img width="1121" height="799" alt="image" src="https://github.com/user-attachments/assets/dcc3a438-65a6-42a7-a62b-9215c2c9b4bb" />
+
+<img width="1079" height="861" alt="image" src="https://github.com/user-attachments/assets/f1cde8fb-8d4f-4354-8852-42ce7eaf8dab" />
+<img width="1142" height="768" alt="image" src="https://github.com/user-attachments/assets/f1b58f43-2b58-4e78-b095-a304c8d416d9" />
+<img width="1635" height="659" alt="image" src="https://github.com/user-attachments/assets/ef7bed27-07ed-41b7-a779-d3eec158df84" />
+
+
+
 
 
 
