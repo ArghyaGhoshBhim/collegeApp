@@ -84,6 +84,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 var keyJWTSecretLocal = Encoding.ASCII.GetBytes(builder.Configuration.GetValue<string>("JWTSecretLocal"));
 var keyJWTSecretGoogle = Encoding.ASCII.GetBytes(builder.Configuration.GetValue<string>("JWTSecretGoogle"));
 var keyJWTSecretMicrosoft = Encoding.ASCII.GetBytes(builder.Configuration.GetValue<string>("JWTSecretMicroshoft"));
+var googleAud = builder.Configuration.GetValue<string>("GoogleAudience");
+var microsoftAud = builder.Configuration.GetValue<string>("MicrosoftAudience");
+var localAud = builder.Configuration.GetValue<string>("LocalAudience");
+var googleIss = builder.Configuration.GetValue<string>("GoogleAIssuer");
+var microsoftIss = builder.Configuration.GetValue<string>("MicrosoftIssuer");
+var localIss = builder.Configuration.GetValue<string>("LocalIssuer");
+
+
 
 builder.Services.AddAuthentication(options =>
 {
@@ -95,15 +103,22 @@ builder.Services.AddAuthentication(options =>
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(keyJWTSecretLocal),
-        ValidateIssuer = false,
+        ValidateIssuer = true,
+        ValidIssuer = localIss,
+
         ValidateAudience = false,
+        ValidAudience = localAud,
     };
 }).AddJwtBearer("GoogleSchemes", options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidateAudience = false,
-        ValidateIssuer = false,
+        ValidateAudience = true,
+        ValidAudience=googleAud,
+
+        ValidateIssuer = true,
+        ValidIssuer = googleIss,
+
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(keyJWTSecretGoogle)
     };
@@ -113,8 +128,12 @@ builder.Services.AddAuthentication(options =>
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(keyJWTSecretMicrosoft),
-        ValidateIssuer = false,
-        ValidateAudience = false
+
+        ValidateIssuer = true,
+        ValidIssuer=microsoftIss,
+
+        ValidateAudience = true,
+        ValidAudience=microsoftAud,
     };
 });
 
