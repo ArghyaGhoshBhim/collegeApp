@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace collegeApp.Controllers
 {
@@ -22,6 +23,7 @@ namespace collegeApp.Controllers
         private readonly IMapper _mapper;
         //private readonly IStudentRepository _studentRepository;
         private readonly IStudentRepository _studentRepository;
+        private APIResponse _response;
 
         public  StudentController(ILogger<StudentController>logger, CollegeNewDBContext dBContext, IMapper mapper,IStudentRepository studentRepository)
         {
@@ -29,6 +31,7 @@ namespace collegeApp.Controllers
             _dbContext=dBContext;
             _mapper=mapper;
             _studentRepository=studentRepository;
+            _response=new APIResponse();
         }
 
 
@@ -36,13 +39,27 @@ namespace collegeApp.Controllers
         [Route("All", Name = "GetStudents")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudents()
+        public async Task<ActionResult<APIResponse>> GetStudents()
         {
-            _logger.LogInformation("GetStudents method started");
-            var students = await _studentRepository.GetALL();
-            var studentDto=_mapper
-                .Map<List<StudentDTO>>(students);
-            return Ok(studentDto);
+            try
+            {
+                _logger.LogInformation("GetStudents method started");
+                var students = await _studentRepository.GetALL();
+                var studentDto = _mapper
+                    .Map<List<StudentDTO>>(students);
+                _response.Data = studentDto;
+                _response.Status = true;
+                _response.StatusCode=HttpStatusCode.OK;
+
+                return _response;
+            }catch (Exception ex)
+            {
+                _response.Status = false;
+                _response.Errors.Add(ex.Message);
+                _response.StatusCode = HttpStatusCode.InternalServerError;
+                return _response;
+            }
+            
         }
 
         [HttpGet]
@@ -50,51 +67,93 @@ namespace collegeApp.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<StudentDTO>> GetStudentById(int id)
+        public async Task<ActionResult<APIResponse>> GetStudentById(int id)
         {
-            if (id < 0)
+            try
             {
-                _logger.LogError("Bad request");
-                return BadRequest();
-            }
-            var student = await _studentRepository.GetById(student=>student.Id==id);
-            if (student == null)
+                if (id < 0)
+                {
+                    _logger.LogError("Bad request");
+                    return BadRequest();
+                }
+                var student = await _studentRepository.GetById(student => student.Id == id);
+                if (student == null)
+                {
+                    _logger.LogError("Student not found with this id");
+                    return NotFound();
+                }
+                var studentDTO = _mapper.Map<StudentDTO>(student);
+                _response.Data=studentDTO;
+                _response.Status = true;
+                _response.StatusCode=HttpStatusCode.OK;
+
+                return _response;
+            }catch (Exception ex)
             {
-                _logger.LogError("Student not found with this id");
-                return NotFound();
+                _response.Status = false;
+                _response.Errors.Add(ex.Message);
+                _response.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _response;
             }
-            var studentDTO = _mapper.Map<StudentDTO>(student);
-            return Ok(studentDTO);
         }
 
         [HttpGet("{name:alpha}", Name = "GeStudentByName")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<StudentDTO>> GeStudentByName(string name)
+        public async Task<ActionResult<APIResponse>> GeStudentByName(string name)
         {
-            var student = await _studentRepository.GetByName(student=>student.StudentName.ToLower().Contains(name.ToLower()));
-            if (student == null)
+            try
             {
-                return NotFound();
-            }
-            var studentDTO = _mapper.Map<StudentDTO>(student);
+                var student = await _studentRepository.GetByName(student => student.StudentName.ToLower().Contains(name.ToLower()));
+                if (student == null)
+                {
+                    return NotFound();
+                }
+                var studentDTO = _mapper.Map<StudentDTO>(student);
 
-            return Ok(studentDTO);
+                _response.Data= studentDTO;
+                _response.Status = true;
+                _response.StatusCode = HttpStatusCode.OK;
+
+                return _response;
+            }catch (Exception ex)
+            {
+                _response.Status = false;
+                _response.Errors.Add(ex.Message);
+                _response.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _response;
+            }
         }
 
         [HttpDelete("{id}", Name = "DeleteStudentById")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<bool>> DeleteStudentById(int id)
+        public async Task<ActionResult<APIResponse>> DeleteStudentById(int id)
         {
-            if (id < 0)
+            try
             {
-                return BadRequest();
+                if (id < 0)
+                {
+                    return BadRequest();
+                }
+                var student = await _studentRepository.GetById(student => student.Id == id);
+                var isDeleted = await _studentRepository.Delete(student);
+                _response.Data= isDeleted;
+                _response.Status = true;
+                _response.StatusCode = HttpStatusCode.OK;
+
+                return _response;
+
+            }catch (Exception ex)
+            {
+                _response.Status = false;
+                _response.Errors.Add(ex.Message);
+                _response.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _response;
             }
-            var student = await _studentRepository.GetById(student => student.Id == id);
-            var isDeleted = await _studentRepository.Delete(student);
-          
-            return Ok(isDeleted);
         }
 
         [HttpPost]
@@ -103,16 +162,30 @@ namespace collegeApp.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
 
-        public async Task<ActionResult<StudentDTO>> CreateStudentAsync([FromBody] StudentDTO model)
+        public async Task<ActionResult<APIResponse>> CreateStudentAsync([FromBody] StudentDTO model)
         {
-            if (model == null)
+            try
             {
-                return BadRequest();
+                if (model == null)
+                {
+                    return BadRequest();
+                }
+                var student = _mapper.Map<Student>(model);
+                model.Id = student.Id;
+                var StudentCreatedId = await _studentRepository.Create(student);
+                _response.Data = CreatedAtRoute("GetStudentById", new { Id = StudentCreatedId.Id }, model);
+                _response.Status = true;
+                _response.StatusCode = HttpStatusCode.OK;
+
+                return _response;
+            }catch(Exception ex)
+            {
+                _response.Status = false;
+                _response.Errors.Add(ex.Message);
+                _response.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _response;
             }
-            var student = _mapper.Map<Student>(model);
-            model.Id = student.Id;
-            var StudentCreatedId=await _studentRepository.Create(student);
-            return CreatedAtRoute("GetStudentById", new { Id = StudentCreatedId.Id }, model);
         }
 
 
