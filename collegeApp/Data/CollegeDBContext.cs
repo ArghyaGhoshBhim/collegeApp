@@ -11,6 +11,7 @@ namespace collegeApp.Data
         public DbSet<Department> Departmens { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<RolePrivilege> RolePrivileges { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             /*modelBuilder.Entity<Student>().HasData(new List<Student>()
@@ -47,6 +48,8 @@ namespace collegeApp.Data
             modelBuilder.ApplyConfiguration(new DepartmentConfig());
             modelBuilder.ApplyConfiguration(new UserConfig());
             modelBuilder.ApplyConfiguration(new RoleConfig());
+            modelBuilder.ApplyConfiguration(new PrivilegeConfig());
+
         }
     }
 }
