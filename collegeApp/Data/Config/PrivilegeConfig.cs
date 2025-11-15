@@ -13,6 +13,8 @@ namespace collegeApp.Data.Config
             builder.Property(x => x.RolePrivilegeName).IsRequired();
             builder.Property(x => x.IsActive).IsRequired();
             builder.Property(x => x.CreatedDate).IsRequired();
+
+            builder.HasOne(n => n.Role).WithMany(n => n.RolePrivileges).HasForeignKey(x => x.RoleId).HasConstraintName("FK_Role_Privileges");
         }
     }
 }

@@ -14,6 +14,8 @@ namespace collegeApp.Data.Config
             builder.Property(x => x.IsActived).IsRequired();
             builder.Property(x => x.CreatedDate).IsRequired();
 
+            
+
         }
     }
 }
