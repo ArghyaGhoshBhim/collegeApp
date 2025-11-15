@@ -494,6 +494,23 @@ public IActionResult GetDataFromScheme2() => Ok("Valid Scheme2 token");
 <img width="1142" height="768" alt="image" src="https://github.com/user-attachments/assets/f1b58f43-2b58-4e78-b095-a304c8d416d9" />
 <img width="1635" height="659" alt="image" src="https://github.com/user-attachments/assets/ef7bed27-07ed-41b7-a779-d3eec158df84" />
 
+## Many-to-Many relationship btn User and Role tabel
+* Create a new table
+<img width="800" height="317" alt="image" src="https://github.com/user-attachments/assets/ef3d6b90-c63b-4047-8590-0b442792296c" />
+* Modify Role and User class
+<img width="1275" height="468" alt="image" src="https://github.com/user-attachments/assets/dbee8518-be2f-44fa-b813-7f1e9f01ecde" />
+<img width="1255" height="458" alt="image" src="https://github.com/user-attachments/assets/af7dceae-7062-4a8b-8f76-9856bac531d2" />
+* Change in db context
+<img width="1268" height="807" alt="image" src="https://github.com/user-attachments/assets/46038282-0722-44ea-9216-dec87dc719dd" />
+
+* Create UserRoleMappingConfig
+<img width="1257" height="411" alt="image" src="https://github.com/user-attachments/assets/a0e55b14-56cf-49a9-b03f-00049f86138e" />
+
+
+
+
+
+
 
 
 
