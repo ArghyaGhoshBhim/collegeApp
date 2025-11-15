@@ -10,6 +10,7 @@ namespace collegeApp.Data
         public DbSet<Student> students { get; set; }
         public DbSet<Department> Departmens { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             /*modelBuilder.Entity<Student>().HasData(new List<Student>()
@@ -45,6 +46,7 @@ namespace collegeApp.Data
             modelBuilder.ApplyConfiguration(new StudenConfig());
             modelBuilder.ApplyConfiguration(new DepartmentConfig());
             modelBuilder.ApplyConfiguration(new UserConfig());
+            modelBuilder.ApplyConfiguration(new RoleConfig());
         }
     }
 }
