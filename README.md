@@ -507,6 +507,11 @@ public IActionResult GetDataFromScheme2() => Ok("Valid Scheme2 token");
 <img width="1257" height="411" alt="image" src="https://github.com/user-attachments/assets/a0e55b14-56cf-49a9-b03f-00049f86138e" />
 
 
+### ER Diagram between Users, UserRoleMapping, Roles, RolePricileges
+  <img width="1295" height="788" alt="image" src="https://github.com/user-attachments/assets/04933025-ea9f-44c9-9359-acd621f810d0" />
+
+
+
 
 
 
